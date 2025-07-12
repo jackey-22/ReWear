@@ -51,12 +51,12 @@ const userschema = new mongoose.Schema(
 			enum: ['user', 'admin'],
 			default: 'user',
 		},
-        isActive: { type: Boolean, default: true },
+		isActive: { type: Boolean, default: true },
 	},
 	{
 		timestamps: true, // automatically creates createdAt and updatedAt
 	}
 );
 
-const userModel = mongoose.model('serviceProviders', userschema);
+const userModel = mongoose.model('users', userschema);
 module.exports = userModel;
