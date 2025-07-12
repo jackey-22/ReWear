@@ -7,6 +7,7 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/admin/Dashboard';
 import VerifyProduct from './pages/admin/VerifyProduct';
 import ShowProduct from './pages/ShowProduct';	
+import ProductDetails from './pages/ProductDetails'
 import AddProduct from './pages/user/AddProduct';
 
 const routes = createBrowserRouter([
@@ -25,6 +26,10 @@ const routes = createBrowserRouter([
 		element: <Login />,
 		// loader: loginLoader,
 	},
+	{
+  path: '/clothes/:id',
+  element: <ProductDetails />,
+},
 	{
 		path: '/login',
 		element: <Login/>,
