@@ -22,13 +22,20 @@ export default function HomePage() {
 				onClick={() => navigate(`/products/${item._id}`)}
 			>
 				<img
-					src={item.images?.[0] || '/noimage.png'}
+					src={
+						item.images?.[0]
+							? `${import.meta.env.VITE_URL}${item.images[0]}`
+							: '/noimage.png'
+					}
 					alt={item.title}
 					className="w-full h-40 object-cover"
 				/>
+
 				<div className="p-3 space-y-1 text-sm">
 					<h4 className="font-semibold text-gray-800">{item.title}</h4>
-					<p className="text-gray-500">{item.category} • {item.size}</p>
+					<p className="text-gray-500">
+						{item.category} • {item.size}
+					</p>
 				</div>
 			</div>
 		</div>
@@ -36,25 +43,25 @@ export default function HomePage() {
 
 	const features = [
 		{
-			title: "List Your Clothes",
-			desc: "Easily upload clothes you no longer wear. Add images, size, condition, and redeem type.",
-			icon: "pi pi-upload"
+			title: 'List Your Clothes',
+			desc: 'Easily upload clothes you no longer wear. Add images, size, condition, and redeem type.',
+			icon: 'pi pi-upload',
 		},
 		{
-			title: "Swap with Community",
-			desc: "Send swap requests to others and exchange items directly — no cash involved!",
-			icon: "pi pi-sync"
+			title: 'Swap with Community',
+			desc: 'Send swap requests to others and exchange items directly — no cash involved!',
+			icon: 'pi pi-sync',
 		},
 		{
-			title: "Earn and Spend Coins",
-			desc: "Earn coins for every item you give away. Use them to redeem new clothes.",
-			icon: "pi pi-coins"
+			title: 'Earn and Spend Coins',
+			desc: 'Earn coins for every item you give away. Use them to redeem new clothes.',
+			icon: 'pi pi-coins',
 		},
 		{
-			title: "Verified Listings",
-			desc: "All listings are reviewed before going live to ensure quality and trust.",
-			icon: "pi pi-check-circle"
-		}
+			title: 'Verified Listings',
+			desc: 'All listings are reviewed before going live to ensure quality and trust.',
+			icon: 'pi pi-check-circle',
+		},
 	];
 
 	return (
@@ -67,18 +74,36 @@ export default function HomePage() {
 						ReWear – Swap Clothes, Save the Planet 🌍
 					</h1>
 					<p className="text-gray-600 max-w-xl mx-auto mb-6">
-						India’s first community clothing exchange platform. Give your clothes a second life, earn points, and discover unique fashion.
+						India’s first community clothing exchange platform. Give your clothes a
+						second life, earn points, and discover unique fashion.
 					</p>
 					<div className="flex justify-center gap-4 flex-wrap">
-						<Button label="Start Swapping" icon="pi pi-sync" className="p-button-lg" onClick={() => navigate('/register')} />
-						<Button label="Browse Items" icon="pi pi-search" className="p-button-outlined p-button-lg" onClick={() => navigate('/products')} />
-						<Button label="List an Item" icon="pi pi-plus" className="p-button-secondary p-button-lg" onClick={() => navigate('/login')} />
+						<Button
+							label="Start Swapping"
+							icon="pi pi-sync"
+							className="p-button-lg"
+							onClick={() => navigate('/register')}
+						/>
+						<Button
+							label="Browse Items"
+							icon="pi pi-search"
+							className="p-button-outlined p-button-lg"
+							onClick={() => navigate('/products')}
+						/>
+						<Button
+							label="List an Item"
+							icon="pi pi-plus"
+							className="p-button-secondary p-button-lg"
+							onClick={() => navigate('/login')}
+						/>
 					</div>
 				</section>
 
 				{/* Featured Carousel */}
 				<section className="mb-20">
-					<h2 className="text-xl font-semibold text-gray-800 mb-4">Featured Clothing Items</h2>
+					<h2 className="text-xl font-semibold text-gray-800 mb-4">
+						Featured Clothing Items
+					</h2>
 					{items.length > 0 ? (
 						<Carousel
 							value={items}
@@ -97,12 +122,19 @@ export default function HomePage() {
 
 				{/* Features Section */}
 				<section className="mb-20">
-					<h2 className="text-xl font-bold text-gray-800 mb-6 text-center">What ReWear Offers</h2>
+					<h2 className="text-xl font-bold text-gray-800 mb-6 text-center">
+						What ReWear Offers
+					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 						{features.map((feature, idx) => (
-							<div key={idx} className="bg-white shadow-md rounded-xl p-6 text-center space-y-3">
+							<div
+								key={idx}
+								className="bg-white shadow-md rounded-xl p-6 text-center space-y-3"
+							>
 								<i className={`${feature.icon} text-blue-600 text-3xl`}></i>
-								<h4 className="text-lg font-semibold text-gray-800">{feature.title}</h4>
+								<h4 className="text-lg font-semibold text-gray-800">
+									{feature.title}
+								</h4>
 								<p className="text-sm text-gray-600">{feature.desc}</p>
 							</div>
 						))}
@@ -112,8 +144,16 @@ export default function HomePage() {
 				{/* Call to Action Footer Banner */}
 				<section className="bg-blue-600 text-white text-center py-16 rounded-xl shadow-lg mb-10">
 					<h2 className="text-2xl font-bold mb-3">Ready to make a difference?</h2>
-					<p className="mb-6">Join thousands swapping clothes and reducing fashion waste. It's free, fun, and impactful.</p>
-					<Button label="Join Now" icon="pi pi-user-plus" className="p-button-rounded p-button-lg p-button-warning text-blue-800" onClick={() => navigate('/register')} />
+					<p className="mb-6">
+						Join thousands swapping clothes and reducing fashion waste. It's free, fun,
+						and impactful.
+					</p>
+					<Button
+						label="Join Now"
+						icon="pi pi-user-plus"
+						className="p-button-rounded p-button-lg p-button-warning text-blue-800"
+						onClick={() => navigate('/register')}
+					/>
 				</section>
 			</main>
 		</>

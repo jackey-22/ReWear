@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchGet } from './../utils/fetch.utils';
-// import PageLayout from '../layout/PageLayout';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import PublicHeader from '../layout/PublicHeader'; // ✅ import the public header
+import PublicHeader from '../layout/PublicHeader';
 
 const ClothingListPage = () => {
 	const [items, setItems] = useState([]);
@@ -29,11 +28,8 @@ const ClothingListPage = () => {
 
 	return (
 		<>
-			<PublicHeader /> {/* ✅ header appears above everything */}
+			<PublicHeader />
 			<main className="pt-24 px-4 md:px-8">
-				{' '}
-				{/* add top padding so content isn't hidden behind fixed header */}
-				{/* <PageLayout> */}
 				<div className="p-6 bg-white shadow-md rounded-md">
 					<h1 className="text-xl md:text-2xl font-bold text-gray-800">
 						Available Clothes
@@ -65,51 +61,62 @@ const ClothingListPage = () => {
 						</div>
 					) : (
 						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-							{filteredItems.map((item) => (
-								<div
-									key={item._id}
-									className="relative bg-white rounded-2xl shadow hover:shadow-xl transition transform hover:scale-105 cursor-pointer overflow-hidden group"
-									onClick={() => navigate(`/clothes/${item._id}`)}
-								>
-									<img
-										src={item.images?.[0] || '/noimage.png'}
-										alt={item.title}
-										className="w-full h-56 object-cover"
-									/>
+							{filteredItems.map((item) => {
+								const imageUrl = item.images?.[0]
+									? `${import.meta.env.VITE_URL}${item.images[0]}`
+									: '/noimage.png';
 
-									{/* Hover overlay */}
-									<div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-300">
-										<p className="text-white text-sm font-semibold">
-											Click to view item
-										</p>
-									</div>
+								return (
+									<div
+										key={item._id}
+										className="relative bg-white rounded-2xl shadow hover:shadow-xl transition transform hover:scale-105 cursor-pointer overflow-hidden group"
+										onClick={() => navigate(`/clothes/${item._id}`)}
+									>
+										<img
+											src={imageUrl}
+											alt={item.title}
+											className="w-full h-40 object-cover"
+										/>
 
-									<div className="p-4 bg-white space-y-1 text-sm text-gray-700">
-										<h2 className="font-semibold text-lg">{item.title}</h2>
-										<p className="text-gray-500 italic">
-											{item.type} • {item.size}
-										</p>
-										<p className="text-gray-500">Category: {item.category}</p>
-										<p className="text-gray-600">Condition: {item.condition}</p>
-										{item.redeemableWith !== 'swap' && (
-											<p className="font-medium text-green-700">
-												{item.points} Coins
+										{/* Hover overlay */}
+										<div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-300">
+											<p className="text-white text-sm font-semibold">
+												Click to view item
 											</p>
-										)}
-										<p className="text-xs text-blue-500 uppercase tracking-wide">
-											{item.redeemableWith === 'swap'
-												? 'Swap Only'
-												: item.redeemableWith === 'points_or_swap'
-												? 'Swap or Points'
-												: 'Points Only'}
-										</p>
+										</div>
+
+										<div className="p-4 bg-white space-y-1 text-sm text-gray-700">
+											<h2 className="font-semibold text-lg">{item.title}</h2>
+											<p className="text-gray-500 italic">
+												{item.type} • {item.size}
+											</p>
+											<p className="text-gray-500">
+												Category: {item.category}
+											</p>
+											<p className="text-gray-600">
+												Condition: {item.condition}
+											</p>
+
+											{item.redeemableWith !== 'swap' && (
+												<p className="font-medium text-green-700">
+													{item.points} Coins
+												</p>
+											)}
+
+											<p className="text-xs text-blue-500 uppercase tracking-wide">
+												{item.redeemableWith === 'swap'
+													? 'Swap Only'
+													: item.redeemableWith === 'points_or_swap'
+													? 'Swap or Points'
+													: 'Points Only'}
+											</p>
+										</div>
 									</div>
-								</div>
-							))}
+								);
+							})}
 						</div>
 					)}
 				</div>
-				{/* </PageLayout> */}
 			</main>
 		</>
 	);

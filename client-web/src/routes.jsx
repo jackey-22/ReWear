@@ -51,10 +51,10 @@ const routes = createBrowserRouter([
 	},
 	{
 		path: '/user',
-		element: <Dashboard />, // Dashboard avse ahiya
+		// element: <Dashboard />, // Dashboard avse ahiya
 		//loader: verifyLoader,
 		errorElement: <ErrorElement />,
-		children: [{ path: 'AddProduct', element: <AddProduct /> }],
+		children: [{ path: 'add-product', element: <AddProduct /> }],
 	},
 	{
 		path: '*',
