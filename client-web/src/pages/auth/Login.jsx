@@ -62,41 +62,61 @@ const Login = () => {
 	return (
 		<>
 			<Toast ref={toast} position="top-right" />
-			<div className="min-h-screen flex items-center justify-center bg-gray-100">
-				<div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md space-y-6">
+
+			<div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-indigo-100 via-white to-cyan-100 px-4">
+				<div className="w-full max-w-md bg-white shadow-lg rounded-3xl p-10 border border-indigo-200">
 					{/* Logo */}
-					<div className="flex justify-center">
-						<img src="/logo.png" alt="Logo" className="h-16 w-16 object-contain" />
+					<div className="flex justify-center mb-8">
+						<img
+							src="/logo.png"
+							alt="Logo"
+							className="h-20 w-20 object-contain drop-shadow-md"
+							loading="lazy"
+						/>
 					</div>
 
-					<h2 className="text-xl font-semibold text-center text-gray-800 tracking-wide uppercase">
-						Login
+					<h2 className="text-3xl font-extrabold text-indigo-900 text-center mb-8 tracking-wide">
+						Welcome Back
 					</h2>
 
-					{/* Email Field */}
-					<FloatLabel>
+					{/* Email */}
+					<FloatLabel className="w-full mb-6">
 						<InputText
 							id="email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							className="w-full"
+							className="w-full border-indigo-300 focus:border-indigo-500 focus:ring-indigo-300"
+							type="email"
+							aria-required="true"
+							aria-describedby="emailHelp"
+							autoComplete="email"
 						/>
-						<label htmlFor="email">Email</label>
+						<label htmlFor="email" className="text-indigo-600 font-medium">
+							Email*
+						</label>
 					</FloatLabel>
 
-					{/* Password Field */}
-					<FloatLabel className="pt-1 w-full">
+					{/* Password */}
+					<FloatLabel className="w-full mb-8">
 						<InputText
 							id="password"
 							type="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							className="w-full"
+							className="w-full border-indigo-300 focus:border-indigo-500 focus:ring-indigo-300"
+							aria-required="true"
+							autoComplete="current-password"
 						/>
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" className="text-indigo-600 font-medium">
+							Password*
+						</label>
 					</FloatLabel>
 
-					<Button label="Login" className="w-full bg-blue-400" onClick={handleLogin} />
+					<Button
+						label="Login"
+						className="w-full p-button-primary font-semibold py-3 shadow-lg transition-shadow duration-300"
+						onClick={handleLogin}
+					/>
 				</div>
 			</div>
 		</>
