@@ -10,7 +10,7 @@ const { errorHandler, asyncRouteHandler } = require('./utils/route.utils');
 
 // include routes here
 const authRoutes = require('./routes/auth.route');
-
+const itemRoutes = require('./routes/item.route')
 const app = express();
 
 app.use(cors({ maxAge: 3600 }));
@@ -30,7 +30,7 @@ app.use(
 
 //Routes
 app.use('/auth', authRoutes);
-
+app.use('/browse-items', itemRoutes);
 app.use(errorHandler);
 
 dbConnect()
