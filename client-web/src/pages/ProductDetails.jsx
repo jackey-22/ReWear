@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'primereact/image';
 import PageLayout from '../layout/PageLayout';
 import PublicHeader from '../layout/PublicHeader';
-
+//
 const product = {
 	id: '1',
 	title: 'Classic Cotton T‑Shirt',
