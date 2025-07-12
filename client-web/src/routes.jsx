@@ -6,11 +6,12 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/admin/Dashboard';
 import VerifyProduct from './pages/admin/VerifyProduct';
 import ShowProduct from './pages/ShowProduct';
-import ProductDetails from './pages/ProductDetails';
 import AddProduct from './pages/user/AddProduct';
 // import ClothingListPage from './pages/user/ClothingListPage';
 import MySwapRequests from './pages/user/MySwapRequests';
 import IncomingSwapRequests from './pages/user/IncomingSwapRequests';
+import Profile from './pages/Profile';
+import AdminProfile from './pages/admin/AdminProfile';
 
 const routes = createBrowserRouter([
 	{
@@ -22,30 +23,33 @@ const routes = createBrowserRouter([
 		element: <ShowProduct />,
 		// loader: loginLoader,
 	},
-	// {
-	// 	path: '/Products',
-	// 	element: <ShowProduct />,
-	// 	// loader: loginLoader,
-	// },
+	{
+		path: '/products/:id',
+		element: <ProductDetails />,
+	},
 	{
 		path: '/login',
 		element: <Login />,
 		// loader: loginLoader,
 	},
-	{
-  path: '/products/:id',
-  element: <ProductDetails />,
-},
+
 	{
 		path: '/register',
 		element: <Register />,
 	},
+	{
+		path: '/profile',
+		element: <Profile />,
+		// loader: loginLoader,
+	},
+
 	{
 		path: '/admin',
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: 'dashboard', element: <Dashboard /> },
 			{ path: 'verify-product', element: <VerifyProduct /> },
+			{ path: 'profile', element: <AdminProfile /> },
 		],
 	},
 	{

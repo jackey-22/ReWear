@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchGet } from '../utils/fetch.utils';
+import { Image } from 'primereact/image';
 import PublicHeader from '../layout/PublicHeader';
 import { Card } from 'primereact/card';
-import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import { Divider } from 'primereact/divider';
@@ -190,6 +190,15 @@ function ProductDetails() {
 
 								<div className="mt-6">{redeemOptions()}</div>
 							</div>
+						)}
+
+						<div>
+							<h4 className="text-base font-semibold text-gray-800 mb-1 mt-4">
+								Description
+							</h4>
+							<p className="text-sm leading-relaxed text-gray-600">
+								{product.description}
+							</p>
 						</div>
 
 						<Divider className="my-6" />
@@ -213,9 +222,31 @@ function ProductDetails() {
 									{product.ownerId?.address || 'N/A'}
 								</p>
 							</div>
-						</div>
-					</Card>
+						) : (
+							<button className={btnClasses}>
+								{product.redeemWith === 'Swap Only'
+									? 'Swap Request'
+									: 'Redeem via Points'}
+							</button>
+						)}
+					</div>
 				</div>
+
+				{/* Previous Listings */}
+				<section className="mt-20 px-4 md:px-8">
+					<h3 className="mb-6 text-2xl font-semibold text-gray-800">Previous Listings</h3>
+					<div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
+						{previousItems.map((item) => (
+							<div key={item.id} className="w-full">
+								<img
+									src={item.image}
+									alt={item.title}
+									className="aspect-[4/3] w-full rounded-lg object-cover shadow"
+								/>
+							</div>
+						))}
+					</div>
+				</section>
 			</div>
 
 			{/* Modals */}

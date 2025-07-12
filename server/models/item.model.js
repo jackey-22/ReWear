@@ -25,11 +25,11 @@ const itemSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
-		isVerified: { type: Boolean, default: false },
-		isActive: { type: Boolean, default: true },
-	},
-	{ timestamps: true }
+    isVerified: { type: Boolean, default: false },
+    isActive: { type: Boolean, default: true },
+  },
+  { timestamps: true }
 );
 
 const itemModel = mongoose.model('Item', itemSchema);
-module.exports = itemModel;
+module.exports = itemModel ;
