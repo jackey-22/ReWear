@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchGet } from './../utils/fetch.utils';
-import PageLayout from '../layout/PageLayout';
+// import PageLayout from '../layout/PageLayout';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import PublicHeader from '../layout/publicHeader'; // ✅ import the public header
+import PublicHeader from '../layout/PublicHeader'; // ✅ import the public header
 
 const ClothingListPage = () => {
 	const [items, setItems] = useState([]);
@@ -30,7 +30,7 @@ const ClothingListPage = () => {
 			<PublicHeader /> {/* ✅ header appears above everything */}
 
 			<main className="pt-24 px-4 md:px-8"> {/* add top padding so content isn't hidden behind fixed header */}
-				<PageLayout>
+				{/* <PageLayout> */}
 					<div className="p-6 bg-white shadow-md rounded-md">
 						<h1 className="text-xl md:text-2xl font-bold text-gray-800">Available Clothes</h1>
 						<p className="text-gray-500 text-sm mb-5">Click on any item to view details or redeem</p>
@@ -96,7 +96,7 @@ const ClothingListPage = () => {
 							</div>
 						)}
 					</div>
-				</PageLayout>
+				{/* </PageLayout> */}
 			</main>
 		</>
 	);
