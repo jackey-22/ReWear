@@ -10,11 +10,13 @@ const { errorHandler, asyncRouteHandler } = require('./utils/route.utils');
 
 // include routes here
 const authRoutes = require('./routes/auth.route');
+const userRoutes = require('./routes/user.route');
 
 const app = express();
 
 app.use(cors({ maxAge: 3600 }));
 app.use(express.static('public'));
+app.use('/uploads', express.static('public/uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -30,6 +32,7 @@ app.use(
 
 //Routes
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.use(errorHandler);
 

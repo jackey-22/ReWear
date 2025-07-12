@@ -2,13 +2,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 // import { loginLoader, verifyLoader } from './loaders/verify.loader';
 import ErrorElement from './components/ErrorElement';
-// import Login from './pages/Login';
+import Login from './pages/auth/Login';
 // import Register from './pages/Register';
-import Dashboard from './pages/admin/Dashboard';
-import VerifyProduct from './pages/admin/VerifyProduct';
-import ShowProduct from './pages/ShowProduct';	
+// import Dashboard from './pages/admin/Dashboard';
+// import VerifyProduct from './pages/admin/VerifyProduct';
+// import ShowProduct from './pages/ShowProduct';
 import AddProduct from './pages/user/AddProduct';
-
 
 const routes = createBrowserRouter([
 	{
@@ -16,40 +15,38 @@ const routes = createBrowserRouter([
 		element: <HomePage />,
 		// loader: loginLoader,
 	},
-	{
-		path: '/Products',
-		element: <ShowProduct/>,
-		// loader: loginLoader,
-	},
 	// {
-	// 	path: '/login',
-	// 	element: <Login.jsx/>,
+	// 	path: '/Products',
+	// 	element: <ShowProduct />,
 	// 	// loader: loginLoader,
 	// },
+	{
+		path: '/login',
+		element: <Login />,
+		// loader: loginLoader,
+	},
 	// {
 	// 	path: '/Register',
 	// 	element: <Register />,
 	// 	// loader: loginLoader,
 	// },
 
-	{
-		path: '/admin',
-		// element: <AdminLayout />, // optional layout if needed
-		// loader: verifyLoader,
-		errorElement: <ErrorElement />,
-		children: [
-			{ path: 'dashboard', element: <Dashboard /> },
-			{ path: 'verifyProduct', element: <VerifyProduct /> },
-		],
-	},
+	// {
+	// 	path: '/admin',
+	// 	// element: <AdminLayout />, // optional layout if needed
+	// 	// loader: verifyLoader,
+	// 	errorElement: <ErrorElement />,
+	// 	children: [
+	// 		{ path: 'dashboard', element: <Dashboard /> },
+	// 		{ path: 'verifyProduct', element: <VerifyProduct /> },
+	// 	],
+	// },
 	{
 		path: '/user',
-		element: <Dashboard />	, // Dashboard avse ahiya
+		// element: <Dashboard />, // Dashboard avse ahiya
 		//loader: verifyLoader,
 		errorElement: <ErrorElement />,
-		children: [
-			{ path: 'AddProduct', element: <AddProduct /> },	
-		],
+		children: [{ path: 'add-product', element: <AddProduct /> }],
 	},
 	{
 		path: '*',
