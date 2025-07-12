@@ -1,51 +1,92 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-// const studentModel = require('../models/student.model');
-// const facultyModel = require('../models/faculty.model');
+const userModel = require('../models/user.model'); // or serviceProviders model
 
 async function login(req, res) {
-	const { username, password, role } = req.body;
+	const { email, password } = req.body;
 
-	if (!username || !password)
-		return res.status(400).json({ success: false, message: 'username and password required' });
+	if (!email || !password)
+		return res.status(400).json({ success: false, message: 'Email and password are required' });
 
-	let profile = null;
+	try {
+		const hashedPassword = md5(password); // hash the entered password
+		const user = await userModel.findOne({ email, passwordHash: hashedPassword });
 
-	if (role === 'STUDENT') {
-		profile = await studentModel.findOne({ enrollment: username, enrollment: password });
-		if (!profile) return res.status(404).json({ message: 'Student profile not found' });
-	} else if (role === 'FACULTY') {
-		profile = await facultyModel.findOne({ email: username, email: password });
-		if (!profile) return res.status(404).json({ message: 'faculty profile not found' });
+		if (!user || !user.isActive)
+			return res
+				.status(401)
+				.json({ success: false, message: 'Invalid credentials or inactive user.' });
+
+		const token = jwt.sign(
+			{
+				id: user._id,
+				role: user.role,
+			},
+			process.env.JWT_SECRET,
+			{ expiresIn: '1d' }
+		);
+
+		return res.json({
+			success: true,
+			data: {
+				token,
+				role: user.role,
+				id: user._id,
+				email: user.email,
+				// name: user.name
+			},
+		});
+	} catch (error) {
+		console.error('Login error:', error);
+		return res.status(500).json({ success: false, message: 'Server error' });
 	}
-
-	const token = jwt.sign(
-		{
-			id: profile._id,
-			// username: user.username,
-			role: role,
-		},
-		process.env.JWT_SECRET,
-		{ expiresIn: '1d' }
-	);
-
-	res.json({
-		success: true,
-		data: {
-			token,
-			username: role === 'STUDENT' ? profile.enrollment : profile.email,
-			role: role,
-			id: profile._id,
-		},
-	});
 }
 
+async function register(req, res) {
+	const { name, email, password, phone, address } = req.body;
+
+	if (!name || !email || !password) {
+		return res
+			.status(400)
+			.json({ success: false, message: 'Name, email, and password are required' });
+	}
+
+	try {
+		// Check if user already exists
+		const existingUser = await userModel.findOne({ email });
+		if (existingUser) {
+			return res.status(409).json({ success: false, message: 'Email already registered' });
+		}
+
+		const newUser = new userModel({
+			name,
+			email,
+			passwordHash: md5(password),
+			phone,
+			address,
+			// other optional fields (gender, etc.) can be set later
+		});
+
+		await newUser.save();
+
+		return res.status(201).json({
+			success: true,
+			message: 'User registered successfully',
+			data: {
+				id: newUser._id,
+				email: newUser.email,
+				// name: newUser.name,
+				role: newUser.role,
+			},
+		});
+	} catch (error) {
+		console.error('Registration Error:', error);
+		return res.status(500).json({ success: false, message: 'Internal Server Error' });
+	}
+}
 async function logout(req, res) {
 	res.clearCookie('auth');
 	return res.json({ success: true });
 }
 
-module.exports = {
-	login,
-	logout,
-};
+module.exports = { login, logout, register };
