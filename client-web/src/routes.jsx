@@ -39,7 +39,7 @@ const routes = createBrowserRouter([
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: 'dashboard', element: <Dashboard /> },
-			{ path: 'verifyProduct', element: <VerifyProduct /> },
+			{ path: 'verify-product', element: <VerifyProduct /> },
 		],
 	},
 	{

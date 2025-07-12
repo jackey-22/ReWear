@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema(
   {
-    ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
     title: { type: String, required: true },
     description: String,
     category: String, // e.g., Men, Women, Kids
