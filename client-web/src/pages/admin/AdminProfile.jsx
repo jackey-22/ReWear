@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Toast } from 'primereact/toast';
-
+import PageLayout from '../../layout/PageLayout';
 function AdminProfile() {
 	const [formData, setFormData] = useState({
 		name: '',
@@ -100,7 +100,7 @@ function AdminProfile() {
 			<div className="p-6 relative">
 				{/* Header */}
 				<div className="flex justify-between items-center mb-6">
-					<h1 className="text-3xl font-bold text-gray-800">Student Profile</h1>
+					<h1 className="text-3xl font-bold text-gray-800">Profile</h1>
 					{!editMode ? (
 						<Button
 							icon="pi pi-user-edit"
@@ -161,12 +161,6 @@ function AdminProfile() {
 							onChange={handleFileChange}
 							hidden
 						/>
-
-						{/* Points */}
-						<div className="flex items-center gap-2 mt-4">
-							<i className="pi pi-money-bill text-yellow-600 text-xl" />
-							<span className="font-semibold text-lg">{formData.points} Points</span>
-						</div>
 					</div>
 
 					{/* Right Column: Fields */}
