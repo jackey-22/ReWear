@@ -21,6 +21,10 @@ const itemSchema = new mongoose.Schema(
       enum: ['points', 'swap', 'points_or_swap'], // owner have privilege to select where to show
       default: 'points_or_swap'
     },
+    points: {
+			type: Number,
+			default: 0,
+		},
     isVerified: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
   },
