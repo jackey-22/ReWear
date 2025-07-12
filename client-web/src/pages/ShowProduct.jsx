@@ -69,7 +69,7 @@ const ClothingListPage = () => {
 								<div
 									key={item._id}
 									className="relative bg-white rounded-2xl shadow hover:shadow-xl transition transform hover:scale-105 cursor-pointer overflow-hidden group"
-									onClick={() => navigate(`/clothes/${item._id}`)}
+									onClick={() => navigate(`/products/${item._id}`)}
 								>
 									<img
 										src={item.images?.[0] || '/noimage.png'}

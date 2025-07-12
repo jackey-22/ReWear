@@ -16,8 +16,7 @@ const getAllItems = async (req, res) => {
 // GET /browse-items/:id
 const getItemById = async (req, res) => {
 	try {
-		const item = await itemModel.findById(req.params.id);
-
+		const item = await itemModel.findById(req.params.id).populate('ownerId'); // owner refers to user _id
 		if (!item) {
 			return res.status(404).json({ success: false, message: 'Item not found' });
 		}
