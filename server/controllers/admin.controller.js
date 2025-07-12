@@ -1,5 +1,7 @@
+const itemModel = require('../models/item.model');
 const Item = require('../models/item.model');
-const User = require('../models/user.model');
+const userModel = require('../models/user.model');
+// const User = require('../models/user.model');
 
 // Get all unverified & active items
 const getUnverifiedItems = async (req, res, next) => {
@@ -55,8 +57,58 @@ const rejectItem = async (req, res, next) => {
 	}
 };
 
+const getDashboardStats = async (req, res) => {
+	try {
+		const totalUsers = await userModel.countDocuments();
+		const itemsListed = await itemModel.countDocuments();
+		const totalAccepted = await itemModel.countDocuments({ isVerified: true });
+		const totalRejected = await itemModel.countDocuments({
+			isVerified: false,
+			isActive: false,
+		});
+
+		return res.status(200).json({
+			success: true,
+			data: {
+				totalUsers,
+				itemsListed,
+				totalAccepted,
+				totalRejected,
+			},
+		});
+	} catch (error) {
+		console.error('Dashboard Stats Error:', error);
+		return res.status(500).json({ success: false, message: 'Server Error' });
+	}
+};
+
+const getAdminProfile = async (req, res) => {
+	try {
+		const userId = res.locals.userData.id;
+
+		if (!userId) {
+			return res
+				.status(401)
+				.json({ success: false, message: 'Unauthorized: No user in context' });
+		}
+
+		const admin = await userModel.findById(userId);
+
+		if (!admin) {
+			return res.status(404).json({ success: false, message: 'Admin not found' });
+		}
+
+		return res.status(200).json({ success: true, data: admin });
+	} catch (error) {
+		console.error('Error fetching admin profile:', error);
+		res.status(500).json({ success: false, message: 'Server error' });
+	}
+};
+
 module.exports = {
 	getUnverifiedItems,
 	approveItem,
 	rejectItem,
+	getDashboardStats,
+	getAdminProfile,
 };
