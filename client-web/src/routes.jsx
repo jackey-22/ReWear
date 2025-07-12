@@ -2,8 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 // import { loginLoader, verifyLoader } from './loaders/verify.loader';
 import ErrorElement from './components/ErrorElement';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import Dashboard from './pages/admin/Dashboard';
 import VerifyProduct from './pages/admin/VerifyProduct';
 import ShowProduct from './pages/ShowProduct';	
@@ -21,16 +21,16 @@ const routes = createBrowserRouter([
 		element: <ShowProduct/>,
 		// loader: loginLoader,
 	},
-	// {
-	// 	path: '/login',
-	// 	element: <Login.jsx/>,
-	// 	// loader: loginLoader,
-	// },
-	// {
-	// 	path: '/Register',
-	// 	element: <Register />,
-	// 	// loader: loginLoader,
-	// },
+	{
+		path: '/login',
+		element: <Login/>,
+		// loader: loginLoader,
+	},
+	{
+		path: '/Register',
+		element: <Register />,
+		// loader: loginLoader,
+	},
 
 	{
 		path: '/admin',
@@ -39,7 +39,7 @@ const routes = createBrowserRouter([
 		errorElement: <ErrorElement />,
 		children: [
 			{ path: 'dashboard', element: <Dashboard /> },
-			{ path: 'verifyProduct', element: <VerifyProduct /> },
+			{ path: 'verify-product', element: <VerifyProduct /> },
 		],
 	},
 	{
