@@ -325,14 +325,6 @@ export default function AddItemPage() {
 									</div>
 								)}
 
-								<div className="field col-12">
-									<label>Tags</label>
-									<Chips
-										value={form.tags}
-										onChange={(e) => handleChange('tags', e.value)}
-									/>
-								</div>
-
 								<div className="field col-12 flex justify-content-end">
 									<Button
 										label="Submit Item"
