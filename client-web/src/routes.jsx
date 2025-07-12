@@ -2,9 +2,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 // import { loginLoader, verifyLoader } from './loaders/verify.loader';
 import ErrorElement from './components/ErrorElement';
-import Login from './pages/Login';
-import AdminDashboard from './pages/admin/Dashboard';
-import VerifyProduct from './pages/admin/VerifyProduct';	
+// import Login from './pages/Login';
+// import Register from './pages/Register';
+import Dashboard from './pages/admin/Dashboard';
+import VerifyProduct from './pages/admin/VerifyProduct';
+import ShowProduct from './pages/ShowProduct';	
+import AddProduct from './pages/user/AddProduct';
 
 
 const routes = createBrowserRouter([
@@ -14,20 +17,20 @@ const routes = createBrowserRouter([
 		// loader: loginLoader,
 	},
 	{
-		path: '/',
+		path: '/Products',
 		element: <ShowProduct/>,
 		// loader: loginLoader,
 	},
-	{
-		path: '/login',
-		element: <Login.jsx/>,
-		// loader: loginLoader,
-	},
-	{
-		path: '/Register',
-		element: <Register />,
-		// loader: loginLoader,
-	},
+	// {
+	// 	path: '/login',
+	// 	element: <Login.jsx/>,
+	// 	// loader: loginLoader,
+	// },
+	// {
+	// 	path: '/Register',
+	// 	element: <Register />,
+	// 	// loader: loginLoader,
+	// },
 
 	{
 		path: '/admin',
@@ -35,7 +38,7 @@ const routes = createBrowserRouter([
 		// loader: verifyLoader,
 		errorElement: <ErrorElement />,
 		children: [
-			{ path: 'dashboard', element: <AdminDashboard /> },
+			{ path: 'dashboard', element: <Dashboard /> },
 			{ path: 'verifyProduct', element: <VerifyProduct /> },
 		],
 	},
@@ -45,7 +48,7 @@ const routes = createBrowserRouter([
 		//loader: verifyLoader,
 		errorElement: <ErrorElement />,
 		children: [
-			{ path: '/AddProduct', element: <ServiceProviderList /> },	
+			{ path: 'AddProduct', element: <AddProduct /> },	
 		],
 	},
 	{
