@@ -7,8 +7,9 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/admin/Dashboard';
 import VerifyProduct from './pages/admin/VerifyProduct';
 import ShowProduct from './pages/ShowProduct';
-import ProductDetails from './pages/ProductDetails';
 import AddProduct from './pages/user/AddProduct';
+import Profile from './pages/Profile';
+import AdminProfile from './pages/admin/AdminProfile';
 
 const routes = createBrowserRouter([
 	{
@@ -17,17 +18,8 @@ const routes = createBrowserRouter([
 		// loader: loginLoader,
 	},
 	{
-		path: '/products',
+		path: '/Products',
 		element: <ShowProduct />,
-		// loader: loginLoader,
-	},
-	{
-		path: '/products/:id',
-		element: <ProductDetails />,
-	},
-	{
-		path: '/login',
-		element: <Login />,
 		// loader: loginLoader,
 	},
 	{
@@ -40,6 +32,11 @@ const routes = createBrowserRouter([
 		element: <Register />,
 		// loader: loginLoader,
 	},
+	{
+		path: '/profile',
+		element: <Profile />,
+		// loader: loginLoader,
+	},
 
 	{
 		path: '/admin',
@@ -49,14 +46,15 @@ const routes = createBrowserRouter([
 		children: [
 			{ path: 'dashboard', element: <Dashboard /> },
 			{ path: 'verify-product', element: <VerifyProduct /> },
+			{ path: 'profile', element: <AdminProfile /> },
 		],
 	},
 	{
 		path: '/user',
-		// element: <Dashboard />, // Dashboard avse ahiya
+		element: <Dashboard />, // Dashboard avse ahiya
 		//loader: verifyLoader,
 		errorElement: <ErrorElement />,
-		children: [{ path: 'add-product', element: <AddProduct /> }],
+		children: [{ path: 'AddProduct', element: <AddProduct /> }],
 	},
 	{
 		path: '*',

@@ -12,13 +12,11 @@ const { errorHandler, asyncRouteHandler } = require('./utils/route.utils');
 const authRoutes = require('./routes/auth.route');
 const itemRoutes = require('./routes/item.route');
 const adminRoutes = require('./routes/admin.route');
-const userRoutes = require('./routes/user.route');
 
 const app = express();
 
 app.use(cors({ maxAge: 3600 }));
 app.use(express.static('public'));
-app.use('/uploads', express.static('public/uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -36,7 +34,6 @@ app.use(
 app.use('/auth', authRoutes);
 app.use('/browse-items', itemRoutes);
 app.use('/admin', adminRoutes);
-app.use('/user', userRoutes);
 
 app.use(errorHandler);
 
